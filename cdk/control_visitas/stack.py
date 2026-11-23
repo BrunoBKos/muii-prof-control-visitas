@@ -25,11 +25,11 @@ class ControlVisitasStack(cdk.Stack):
         # instancia puede llegar a Aurora por el 5432.
         sg = ec2.SecurityGroup(self, "AppSg", vpc=vpc, description="Control visitas: HTTP y SSH")
         # TODO (Tarea 2): permite la entrada HTTP (puerto 80) desde cualquier dirección IPv4.
-	sg.add_ingress_rule(
-		ec2.Peer.any_ipv4(),
-		ec2.Port.tcp(80),
-		"HTTP desde cualquier IPv4"
-	)
+        sg.add_ingress_rule(
+            ec2.Peer.any_ipv4(),
+            ec2.Port.tcp(80),
+            "HTTP desde cualquier IPv4"
+        )
         # SSH solo desde tu IP (la escribe params.sh en cdk.json)
         if mi_ip:
             sg.add_ingress_rule(ec2.Peer.ipv4(f"{mi_ip}/32"), ec2.Port.tcp(22), "SSH desde mi IP")
